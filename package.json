@@ -17,5 +17,9 @@
     "format:check": "oxfmt --check .",
     "typecheck": "pnpm --filter @louis-world/game typecheck",
     "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test && pnpm build"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.51.0",
+    "oxlint": "^1.66.0"
   }
 }
