@@ -1,0 +1,21 @@
+# 새 worktree를 사용자에게 넘기기 전에 의존성을 설치한다.
+[[pre-start]]
+deps = "pnpm install"
+
+# worktree 생성 후 gitignored 파일을 복사해 cold start를 줄인다.
+[post-start]
+copy_ignored = "wt step copy-ignored"
+
+# Worktrunk가 merge commit을 만들기 전에 빠른 정적 검사를 실행한다.
+[[pre-commit]]
+lint = "pnpm lint"
+format = "pnpm format:check"
+typecheck = "pnpm typecheck"
+
+# target branch로 merge하기 전에 테스트와 production build를 검증한다.
+[[pre-merge]]
+test = "pnpm test"
+build = "pnpm build"
+
+[aliases]
+verify = "pnpm check"
