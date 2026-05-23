@@ -1,10 +1,10 @@
 # AGENTS.md
 
-Source-level design guidance for the game app.
+게임 앱의 소스 수준 설계 지침입니다.
 
-- Keep Phaser game logic independent from framework-specific UI code.
-- Do not scatter DOM access inside scenes or gameplay objects.
-- Keep game bootstrap, Phaser config, scenes, systems, objects, and assets in clear boundaries.
-- Prefer explicit events or small adapter functions for communication that may later cross into React.
-- Do not introduce React, routing, or app-shell state here unless the project explicitly chooses that integration.
-- When adding gameplay state, consider whether it is internal-only or may need to be observed by an external UI later.
+- Phaser 게임 로직은 프레임워크별 UI 코드와 독립적으로 유지하세요.
+- 씬이나 게임플레이 객체 안에 DOM 접근을 흩뿌리지 마세요.
+- 게임 부트스트랩, Phaser 설정, 씬, 시스템, 객체, 에셋의 경계를 명확히 유지하세요.
+- 나중에 React로 넘어갈 수 있는 통신에는 명시적 이벤트나 작은 어댑터 함수를 선호하세요.
+- 프로젝트가 명시적으로 해당 통합을 선택하지 않는 한 여기에는 React, 라우팅, 앱 셸 상태를 도입하지 마세요.
+- 게임플레이 상태를 추가할 때는 내부 전용인지, 아니면 나중에 외부 UI가 관찰해야 할 수 있는지 고려하세요.
