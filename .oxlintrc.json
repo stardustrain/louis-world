@@ -1,0 +1,9 @@
+{
+  "ignorePatterns": [
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "apps/*/dist/**",
+    "apps/*/coverage/**"
+  ]
+}
