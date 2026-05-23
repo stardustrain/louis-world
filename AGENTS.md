@@ -21,3 +21,9 @@ When creating commits or proposing commit messages:
 - 작업 결과가 게임의 정본 방향을 바꾸면 구현과 함께 관련 `docs/game/` 문서도 업데이트한다.
 - `AGENTS.md`에는 게임 설정을 복사하지 않는다. 이 파일은 `docs/game/`을 가리키는 포인터 역할만 한다.
 - `docs/game/` 업데이트가 반복적으로 많아지면 전용 스킬 생성을 검토한다.
+
+## References
+
+- [Game Canon](docs/game/)
+- [Code Style Skill](.codex/skills/code-style/SKILL.md)
+- [Test Code Style Skill](.codex/skills/test-code-style/SKILL.md)
