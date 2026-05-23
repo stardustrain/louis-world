@@ -9,6 +9,7 @@
     "node_modules/**",
     "dist/**",
     "coverage/**",
+    "AGENTS.md",
     "apps/*/dist/**",
     "apps/*/coverage/**",
     "docs/**"
