@@ -1,20 +1,20 @@
-# Worktrunk Workflow Design
+# Worktrunk 워크플로 설계
 
-Date: 2026-05-23
+작성일: 2026-05-23
 
-## Purpose
+## 목적
 
-Add a shared Worktrunk project workflow for this repository.
+이 저장소에 공유 Worktrunk 프로젝트 워크플로를 추가한다.
 
-The workflow should make new worktrees usable quickly, keep `wt merge` guarded
-by the same quality checks documented in the README, and provide shared commit
-message guidance for developers who enable Worktrunk LLM commits locally.
+새 worktree를 빠르게 사용할 수 있게 만들고, `wt merge` 전에 README에
+문서화된 품질 검증 의도를 로컬에서 강제하며, Worktrunk LLM 커밋 메시지를
+개인 설정으로 켠 개발자에게는 저장소 공통 커밋 메시지 지침을 제공한다.
 
-## Context
+## 현재 맥락
 
-The repository is a pnpm workspace with one game app at `apps/game`.
+이 저장소는 `apps/game` 앱 하나를 가진 pnpm workspace다.
 
-Relevant root scripts:
+관련 루트 스크립트는 다음과 같다.
 
 ```text
 pnpm lint
@@ -25,58 +25,59 @@ pnpm build
 pnpm check
 ```
 
-The README says changes should pass `pnpm check` before submission. Worktrunk
-can enforce the same intent locally during `wt merge`, while still splitting the
-checks so failures are easier to read.
+README는 변경 제출 전 `pnpm check` 통과를 요구한다. Worktrunk는 같은 의도를
+`wt merge` 중 로컬에서 강제할 수 있다. 다만 실패 원인을 읽기 쉽게 하기 위해
+검증 단계는 여러 명령으로 나눈다.
 
-There is currently no Worktrunk project config at `.config/wt.toml`.
+현재 `.config/wt.toml` 프로젝트 설정은 없다.
 
-## Decisions
+## 결정 사항
 
-- Add `.config/wt.toml` as the shared project config.
-- Keep user-specific Worktrunk settings out of the repository.
-- Use `pre-start` for blocking worktree setup.
-- Use `post-start` for background gitignored-file copying.
-- Use split merge verification:
+- 공유 프로젝트 설정 파일로 `.config/wt.toml`을 추가한다.
+- 사용자별 Worktrunk 설정은 저장소에 넣지 않는다.
+- 새 worktree 생성 시 반드시 끝나야 하는 준비 작업은 `pre-start`에 둔다.
+- gitignored 파일 복사는 `post-start`에 둬서 백그라운드로 실행한다.
+- merge 검증은 다음처럼 나눈다.
   - `pre-commit`: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
   - `pre-merge`: `pnpm test`, `pnpm build`
-- Use Worktrunk pipeline form (`[[pre-start]]`, `[[pre-commit]]`,
-  `[[pre-merge]]`) for `pre-*` hooks.
-- Add a shared `verify` alias that runs `pnpm check`.
-- Add project commit-message guidance through
-  `[commit.generation].template-append`.
-- Do not add the Codex LLM command to `.config/wt.toml`, because that command
-  belongs in each developer's user config.
+- `pre-*` 훅은 Worktrunk 권장 pipeline 형식인 `[[pre-start]]`,
+  `[[pre-commit]]`, `[[pre-merge]]`를 사용한다.
+- 수동 전체 검증용 공유 alias로 `verify = "pnpm check"`를 추가한다.
+- 프로젝트 공통 커밋 메시지 지침은
+  `[commit.generation].template-append`로 추가한다.
+- Codex LLM 실행 command는 `.config/wt.toml`에 넣지 않는다. 이 값은 각
+  개발자의 `~/.config/worktrunk/config.toml`에 속한다.
 
-## Non-Goals
+## 하지 않을 것
 
-- Do not edit `~/.config/worktrunk/config.toml` as part of the project config
-  change.
-- Do not approve Worktrunk hooks on behalf of the user.
-- Do not bypass Worktrunk hook approval with `--yes`.
-- Do not add dev-server auto-starting yet.
-- Do not change package scripts or application code.
+- 이번 프로젝트 설정 변경에서 `~/.config/worktrunk/config.toml`은 편집하지
+  않는다.
+- 사용자를 대신해 Worktrunk 훅을 승인하지 않는다.
+- 승인 prompt를 피하려고 `wt merge --yes`, `wt switch --yes`,
+  `wt hook --yes`를 임의로 실행하지 않는다.
+- 아직 dev server 자동 실행은 추가하지 않는다.
+- package script나 애플리케이션 코드는 바꾸지 않는다.
 
-## Project Config Shape
+## 프로젝트 설정 형태
 
-Create `.config/wt.toml` with these responsibilities:
+`.config/wt.toml`은 다음 역할을 가진다.
 
 ```toml
-# Install dependencies before a newly created worktree is handed to the user.
+# 새 worktree를 사용자에게 넘기기 전에 의존성을 설치한다.
 [[pre-start]]
 deps = "pnpm install"
 
-# Copy gitignored files after worktree creation to reduce cold starts.
+# worktree 생성 후 gitignored 파일을 복사해 cold start를 줄인다.
 [post-start]
 copy_ignored = "wt step copy-ignored"
 
-# Run fast static checks before Worktrunk creates the merge commit.
+# Worktrunk가 merge commit을 만들기 전에 빠른 정적 검사를 실행한다.
 [[pre-commit]]
 lint = "pnpm lint"
 format = "pnpm format:check"
 typecheck = "pnpm typecheck"
 
-# Run runtime and production-build verification before merging to the target.
+# target branch로 merge하기 전에 테스트와 production build를 검증한다.
 [[pre-merge]]
 test = "pnpm test"
 build = "pnpm build"
@@ -93,69 +94,71 @@ template-append = """
 """
 ```
 
-`pnpm install` runs in `pre-start` so a new worktree has dependencies before
-follow-up commands or agents use it. `wt step copy-ignored` runs in `post-start`
-because it is helpful but should not block navigation longer than necessary.
+`pnpm install`은 `pre-start`에서 실행한다. 그래야 새 worktree가 후속 명령이나
+에이전트에 넘어가기 전에 의존성을 가진 상태가 된다.
 
-## Merge Verification
+`wt step copy-ignored`는 유용하지만 navigation을 오래 막을 필요는 없으므로
+`post-start`에서 백그라운드로 실행한다.
 
-`wt merge` runs `pre-commit` before creating the squash commit and `pre-merge`
-after rebase, before merging into the target branch.
+## Merge 검증
 
-The split verification keeps cheap static checks first:
+`wt merge`는 squash commit 생성 전 `pre-commit`을 실행하고, rebase 후 target
+branch에 merge하기 전 `pre-merge`를 실행한다.
 
-- `pnpm lint` catches lint failures.
-- `pnpm format:check` catches formatting drift.
-- `pnpm typecheck` catches TypeScript errors.
+먼저 실행할 빠른 정적 검사는 다음과 같다.
 
-Runtime and build checks run closer to the merge point:
+- `pnpm lint`: lint 실패를 잡는다.
+- `pnpm format:check`: formatting drift를 잡는다.
+- `pnpm typecheck`: TypeScript 오류를 잡는다.
 
-- `pnpm test` runs the Vitest suite.
-- `pnpm build` verifies TypeScript and the Vite production build.
+merge 직전에 실행할 runtime/build 검증은 다음과 같다.
 
-This is equivalent in intent to `pnpm check`, but easier to diagnose when one
-step fails.
+- `pnpm test`: Vitest suite를 실행한다.
+- `pnpm build`: TypeScript와 Vite production build를 검증한다.
 
-## Commit Message Generation Boundary
+전체 의도는 `pnpm check`와 같지만, 어느 단계에서 실패했는지 더 쉽게 볼 수
+있도록 나눈다.
 
-Worktrunk's LLM command is user-specific and should stay in
-`~/.config/worktrunk/config.toml`.
+## 커밋 메시지 생성 경계
 
-Developers who want Codex-generated Worktrunk commit messages can add this to
-their user config:
+Worktrunk의 LLM 실행 command는 사용자별 설정이므로
+`~/.config/worktrunk/config.toml`에 있어야 한다.
+
+Codex로 Worktrunk 커밋 메시지를 생성하고 싶은 개발자는 사용자 설정에 다음을
+추가할 수 있다.
 
 ```toml
 [commit.generation]
 command = "codex exec -m gpt-5.1-codex-mini -c model_reasoning_effort='low' -c system_prompt='' --sandbox=read-only --json - | jq -sr '[.[] | select(.item.type? == \"agent_message\")] | last.item.text'"
 ```
 
-The project config only contributes shared style guidance through
-`template-append`. Worktrunk will prompt for approval before using project
-prompt guidance for the first time or after it changes.
+프로젝트 설정은 `template-append`를 통해 저장소 공통 스타일 지침만 제공한다.
+Worktrunk는 project prompt guidance를 처음 사용하거나 변경된 뒤 처음 사용할
+때 사용자에게 승인을 요청한다.
 
-## Approval And Security
+## 승인과 보안
 
-Worktrunk requires approval before running project-defined hooks and aliases.
-That approval is a local trust decision for the developer.
+Worktrunk는 프로젝트가 정의한 hook과 alias를 실행하기 전에 승인을 요구한다.
+이 승인은 각 개발자가 로컬에서 내려야 하는 trust decision이다.
 
-Expected first-use flow:
+첫 사용 시 예상 흐름은 다음과 같다.
 
 ```bash
 wt config approvals add
 ```
 
-The agent should not run `wt merge --yes`, `wt switch --yes`, or
-`wt hook --yes` on the user's behalf just to bypass approval prompts.
+에이전트는 승인 prompt를 우회하기 위해 사용자를 대신해 `wt merge --yes`,
+`wt switch --yes`, `wt hook --yes`를 실행하지 않는다.
 
-## Verification Plan
+## 검증 계획
 
-After implementation:
+구현 후 다음을 확인한다.
 
-- Confirm `.config/wt.toml` exists.
-- Run `wt hook show` to verify Worktrunk reads the configured hooks.
-- Run `wt hook pre-commit --yes` to validate static checks only if the user has
-  explicitly accepted the one-shot approval bypass for this verification.
-- Otherwise, ask the user to approve hooks with `wt config approvals add`, then
-  run `wt hook pre-commit`.
-- Run `pnpm check` directly to verify the repository still passes its documented
-  full check.
+- `.config/wt.toml`이 존재한다.
+- `wt hook show`로 Worktrunk가 설정된 hook을 읽는지 확인한다.
+- 사용자가 일회성 승인 우회를 명시적으로 허용한 경우에만
+  `wt hook pre-commit --yes`로 정적 검사를 검증한다.
+- 그렇지 않으면 사용자에게 `wt config approvals add`로 hook을 승인하게 한 뒤
+  `wt hook pre-commit`을 실행한다.
+- `pnpm check`를 직접 실행해 저장소의 문서화된 전체 검증이 계속 통과하는지
+  확인한다.
