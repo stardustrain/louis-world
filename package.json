@@ -7,16 +7,23 @@
     "dev": "pnpm --filter @louis-world/game dev",
     "build": "pnpm --filter @louis-world/game build",
     "preview": "pnpm --filter @louis-world/game preview",
+    "prepare": "husky",
     "test": "pnpm --filter @louis-world/game test",
     "lint": "oxlint .",
     "format": "oxfmt .",
+    "format:staged": "lint-staged",
     "format:check": "oxfmt --check .",
     "typecheck": "pnpm --filter @louis-world/game typecheck",
     "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test && pnpm build"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,jsonc,css,html,md}": "oxfmt --write"
   },
   "engines": {
     "node": "24.x"
