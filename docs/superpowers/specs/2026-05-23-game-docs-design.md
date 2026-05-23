@@ -1,40 +1,41 @@
-# Game Canon Docs Design
+# 게임 정본 문서 설계
 
-Date: 2026-05-23
+작성일: 2026-05-23
 
-## Purpose
+## 목적
 
-Create a lightweight Korean source of truth for the game concept, world,
-characters, and first scenario flow.
+게임의 핵심 방향, 세계관, 캐릭터, 첫 시나리오 흐름을 정리하는
+가벼운 한국어 정본 문서를 만든다.
 
-The project is still at the beginning of development, so these documents should
-not become a heavy game design bible. They should be short enough to maintain,
-but clear enough for future AI and development sessions to use as the shared
-reference before changing gameplay, story, characters, dog behavior, tone, or
-world details.
+프로젝트는 아직 막 시작한 단계다. 따라서 이 문서들은 무거운 게임
+디자인 바이블이 되면 안 된다. 대신 앞으로의 AI 작업과 개발 세션에서
+게임플레이, 이야기, 캐릭터, 강아지 행동, 톤, 세계관을 바꾸기 전에
+공통으로 참고할 수 있는 기준 문서가 되어야 한다.
 
-## Source Material
+## 원본 자료
 
-Use `/Users/lucashan/Documents/dog-starland-design-brief.md` as the source
-brief. The brief itself is not copied into the repository. Instead, its current
-direction is distilled into four canonical documents under `docs/game/`.
+`/Users/lucashan/Documents/dog-starland-design-brief.md`를 원본 브리프로
+사용한다.
 
-## Decisions
+이 브리프 자체는 레포지토리에 복사하지 않는다. 대신 현재까지 정리된
+방향을 `docs/game/` 아래의 정본 문서 4개로 압축한다.
 
-- Store the game canon documents under `docs/game/`.
-- Write all four documents in Korean.
-- Keep the documents lightweight and practical.
-- Treat the four documents as the source of truth after they are created.
-- Do not copy the original brief into the repository.
-- Add a short root `AGENTS.md` reference rule so AI coding agents read these
-  documents before changing game concept, scenario, character, world, dialogue,
-  or dog behavior.
-- Do not create a custom skill yet. Add one later only if `docs/game/` updates
-  become frequent enough to justify a repeatable workflow.
+## 결정 사항
 
-## Document Set
+- 게임 정본 문서는 `docs/game/` 아래에 둔다.
+- 네 문서는 모두 한국어로 작성한다.
+- 문서는 가볍고 실용적으로 유지한다.
+- 문서가 만들어진 뒤에는 네 문서를 게임 방향의 기준으로 본다.
+- 원본 브리프는 레포지토리에 복사하지 않는다.
+- 루트 `AGENTS.md`에는 짧은 참조 규칙만 추가한다.
+- AI 코딩 에이전트는 게임 컨셉, 시나리오, 캐릭터, 세계관, 대사,
+  강아지 행동, 톤을 바꾸기 전에 `docs/game/` 문서를 읽어야 한다.
+- 아직 커스텀 스킬은 만들지 않는다.
+- `docs/game/` 업데이트가 반복적으로 많아지면 그때 별도 스킬을 만든다.
 
-Create these files:
+## 만들 문서
+
+다음 파일을 만든다.
 
 ```text
 docs/game/
@@ -46,115 +47,115 @@ docs/game/
 
 ### `vision.md`
 
-Purpose: Define the game's core direction and decision criteria.
+역할: 게임의 핵심 방향과 판단 기준을 정리한다.
 
-Include:
+포함할 내용:
 
-- One-line game description.
-- Player emotional goals.
-- Core day loop.
-- Initial prototype success criteria.
-- Features and tones that are out of scope for the early prototype.
+- 게임 한 줄 설명
+- 플레이어가 느껴야 하는 감정
+- 핵심 하루 루프
+- 초기 프로토타입 성공 기준
+- 초기 범위에서 만들지 않을 것
 
-This is the first document to read when deciding whether a new idea fits the
-game.
+새 아이디어가 이 게임에 맞는지 판단할 때 가장 먼저 읽는 문서다.
 
 ### `world.md`
 
-Purpose: Define the starland setting, tone, and boundaries.
+역할: 별나라의 톤, 첫 공간, 표현 범위, 금지선을 정리한다.
 
-Include:
+포함할 내용:
 
-- One-line description of the world.
-- First playable space: small house and yard in the starland.
-- Visual, audio, and emotional keywords.
-- Rules for turning ordinary dog-care actions into starland expressions.
-- Allowed tone and content.
-- Things to avoid.
-- A short list of unresolved world questions.
+- 세계의 한 줄 설명
+- 첫 플레이 공간: 별나라의 작은 집과 마당
+- 시각, 청각, 감정 키워드
+- 현실의 강아지 돌봄 행동을 별나라식 표현으로 바꾸는 규칙
+- 표현해도 되는 톤과 소재
+- 피해야 할 톤과 소재
+- 아직 정하지 않은 세계관 질문
 
-The world should feel unfamiliar but safe. It should support the relationship
-between the player and the dog rather than becoming a large fantasy lore system.
+이 세계는 낯설지만 안전해야 한다. 큰 판타지 세계관보다 플레이어와
+강아지의 관계를 돕는 장소여야 한다.
 
 ### `characters.md`
 
-Purpose: Define the player character, dog, relationship, and future NPC
-constraints.
+역할: 주인공, 강아지, 둘의 관계, 이후 NPC 추가 기준을 정리한다.
 
-Include:
+포함할 내용:
 
-- Player character role and tone.
-- Dog role, personality, and behavior expression.
-- How the player and dog relationship should change over time.
-- Candidate role for early NPCs, if any.
-- Guardrails so NPCs do not steal focus from the player-dog relationship.
-- Example dialogue tone for the player.
+- 주인공의 역할과 톤
+- 강아지의 역할, 성격, 행동 표현
+- 주인공과 강아지의 관계 변화 방향
+- 초기 NPC가 있다면 어떤 역할이어야 하는지
+- NPC가 플레이어와 강아지의 관계를 빼앗지 않기 위한 기준
+- 주인공 대사 톤 예시
 
-The dog should not be treated as a command object. Its emotions should be shown
-through movement, distance, timing, sound, posture, and small autonomous actions.
+강아지는 명령을 수행하는 오브젝트처럼 보이면 안 된다. 감정은 움직임,
+거리, 반응 속도, 소리, 자세, 작은 자율 행동으로 드러나야 한다.
 
 ### `scenario.md`
 
-Purpose: Define the story start and first playable day.
+역할: 이야기의 시작과 첫 플레이 하루를 정리한다.
 
-Include:
+포함할 내용:
 
-- Starting situation.
-- Prologue flow.
-- First-day sequence.
-- Emotional goal for each sequence.
-- First-day emotional curve.
-- Story developments to avoid.
-- Long-term expansion candidates.
+- 이야기 시작 상황
+- 프롤로그 흐름
+- 첫날 플레이 순서
+- 각 순서의 감정 목표
+- 첫날의 감정 곡선
+- 피해야 할 전개
+- 장기 확장 후보
 
-The first day should stay small, warm, and playable. Story should not overpower
-the daily interaction with the dog.
+첫날은 작고 따뜻하고 플레이 가능한 경험으로 유지한다. 이야기가
+강아지와의 일상 상호작용을 압도하면 안 된다.
 
-## Writing Rules
+## 작성 원칙
 
-- Use Korean prose with short, clear sentences and bullet lists.
-- Keep the tone warm but actionable.
-- Put only directionally stable content in the main body.
-- Put unresolved items in an `아직 정하지 않은 것` section where needed.
-- Avoid large lists of speculative ideas.
-- Do not use formal decision logs yet.
-- Do not over-structure the documents with `Confirmed`, `Deferred`, or similar
-  status sections at this stage.
-- Keep the repeated criteria visible:
-  - Does this make the dog feel more alive?
-  - Does this make time with the dog feel warmer?
-  - Does this make repetition feel like affection rather than labor?
-  - Does this give a small sense of satisfaction at the end of the day?
-  - Does this avoid expanding the early prototype unnecessarily?
+- 한국어로 쓴다.
+- 짧고 명확한 문장과 목록을 사용한다.
+- 따뜻한 톤은 유지하되, 개발 판단에 쓸 수 있게 구체적으로 쓴다.
+- 본문에는 지금 방향으로 안정적인 내용만 둔다.
+- 아직 정하지 않은 내용은 필요한 문서 끝에 `아직 정하지 않은 것`
+  섹션으로 짧게 둔다.
+- 후보 아이디어를 길게 나열하지 않는다.
+- 아직은 공식 결정 기록을 만들지 않는다.
+- `Confirmed`, `Deferred` 같은 상태 구분 섹션도 아직 만들지 않는다.
+- 다음 판단 기준이 문서 안에서 잘 보이게 한다.
+  - 이 선택이 강아지를 더 살아있는 존재처럼 느끼게 하는가?
+  - 이 선택이 강아지와 함께 있는 시간을 더 따뜻하게 만드는가?
+  - 이 선택이 반복 행동을 노동이 아니라 애정 표현처럼 만드는가?
+  - 이 선택이 하루의 끝에 작은 만족감을 주는가?
+  - 이 선택이 초기 프로토타입 범위를 불필요하게 키우지 않는가?
 
-## Agent Guidance
+## AI 작업 지침
 
-Update the root `AGENTS.md` with a short rule:
+루트 `AGENTS.md`에 짧은 규칙을 추가한다.
 
-- Before work that affects gameplay concept, scenario, characters, world,
-  dialogue, dog behavior, or tone, read the relevant files under `docs/game/`.
-- If a task changes canonical game direction, update the relevant `docs/game/`
-  document together with the implementation.
-- Keep `AGENTS.md` as a pointer, not a copy of the game design documents.
-- Consider a dedicated skill later if this update pattern becomes repetitive.
+- 게임 컨셉, 시나리오, 캐릭터, 세계관, 대사, 강아지 행동, 톤에 영향을
+  주는 작업 전에는 `docs/game/`의 관련 문서를 읽는다.
+- 작업 결과가 게임의 정본 방향을 바꾸면 구현과 함께 관련
+  `docs/game/` 문서도 업데이트한다.
+- `AGENTS.md`에는 게임 설정을 복사하지 않는다.
+- `AGENTS.md`는 `docs/game/`을 가리키는 포인터 역할만 한다.
+- 이런 업데이트가 반복되면 나중에 전용 스킬을 검토한다.
 
-## Non-Goals
+## 하지 않을 것
 
-- Do not implement gameplay.
-- Do not create Phaser scenes, assets, systems, or data structures.
-- Do not write a complete long-form GDD.
-- Do not create a custom Codex skill yet.
-- Do not import or commit the original design brief as a separate repo file.
-- Do not add extra docs such as `systems/dog-state.md` or `art/style-guide.md`
-  until real implementation work creates that need.
+- 게임플레이를 구현하지 않는다.
+- Phaser 장면, 에셋, 시스템, 데이터 구조를 만들지 않는다.
+- 긴 GDD를 만들지 않는다.
+- 지금 커스텀 Codex 스킬을 만들지 않는다.
+- 원본 브리프를 별도 repo 파일로 복사하거나 커밋하지 않는다.
+- 실제 구현 중 필요가 생기기 전에는 `systems/dog-state.md`,
+  `art/style-guide.md` 같은 추가 문서를 만들지 않는다.
 
-## Verification
+## 검증 기준
 
-After writing the implementation plan and later creating the documents, verify:
+나중에 구현 계획을 작성하고 실제 문서를 만든 뒤에는 다음을 확인한다.
 
-- The four files exist under `docs/game/`.
-- The documents are in Korean.
-- The root `AGENTS.md` points to `docs/game/` without duplicating the docs.
-- The documents are short enough to read during future AI sessions.
-- The documents do not introduce heavy mechanics, dark story pressure, or
-  speculative world lore beyond the current brief.
+- `docs/game/` 아래에 네 파일이 존재한다.
+- 네 문서는 한국어로 작성되어 있다.
+- 루트 `AGENTS.md`는 `docs/game/`을 가리키며, 내용을 중복하지 않는다.
+- 문서는 이후 AI 세션에서 읽기 부담스럽지 않을 만큼 짧다.
+- 문서는 현재 브리프를 벗어난 무거운 시스템, 어두운 이야기 압박,
+  과도한 세계관 설정을 추가하지 않는다.
