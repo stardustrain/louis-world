@@ -32,6 +32,7 @@
 ### Task 1: Map Metadata And Coordinate Tests
 
 **Files:**
+
 - Create: `apps/game/src/game/maps/homeYardMap.test.ts`
 - Create: `apps/game/src/game/maps/homeYardMap.ts`
 
@@ -228,6 +229,7 @@ git commit -m "feat: add home yard map metadata"
 ### Task 2: Placeholder Tileset And Tiled JSON Assets
 
 **Files:**
+
 - Create: `apps/game/scripts/createHomeYardBlockoutAssets.mjs`
 - Create: `apps/game/public/assets/tilesets/home-yard-placeholder.svg`
 - Create: `apps/game/public/assets/tilemaps/home-yard-blockout.json`
@@ -284,15 +286,7 @@ await writeFile(paths.tileset, createTilesetSvg(), "utf8");
 await writeFile(paths.tilemap, `${JSON.stringify(createTilemapJson(), null, 2)}\n`, "utf8");
 
 function createTilesetSvg() {
-  const tileColors = [
-    "#233647",
-    "#3d6f5d",
-    "#b9a56b",
-    "#7c5a4a",
-    "#89c6a3",
-    "#ef4444",
-    "#8b5cf6",
-  ];
+  const tileColors = ["#233647", "#3d6f5d", "#b9a56b", "#7c5a4a", "#89c6a3", "#ef4444", "#8b5cf6"];
   const tileLabels = ["ground", "yard", "path", "house", "decor", "block", "locked"];
   const rects = tileColors
     .map((color, index) => {
@@ -309,7 +303,7 @@ function createTilesetSvg() {
 
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${tileSize * tileCount}" height="${tileSize}" viewBox="0 0 ${tileSize * tileCount} ${tileSize}">`,
-    "  <rect width=\"100%\" height=\"100%\" fill=\"#111827\" />",
+    '  <rect width="100%" height="100%" fill="#111827" />',
     `  ${rects}`,
     "</svg>",
     "",
@@ -429,7 +423,12 @@ function createObjectLayer(id) {
     id,
     name: "gameplay_markers",
     objects: [
-      createPointObject(1, objects.playerSpawn.name, objects.playerSpawn.tileX, objects.playerSpawn.tileY),
+      createPointObject(
+        1,
+        objects.playerSpawn.name,
+        objects.playerSpawn.tileX,
+        objects.playerSpawn.tileY,
+      ),
       createPointObject(2, objects.dogSpawn.name, objects.dogSpawn.tileX, objects.dogSpawn.tileY),
       createAreaObject(3, "house_door", areas.door),
       createAreaObject(4, "locked_path", areas.lockedPath),
@@ -557,6 +556,7 @@ git commit -m "feat: add home yard blockout assets"
 ### Task 3: Asset Loading Adapter
 
 **Files:**
+
 - Create: `apps/game/src/game/maps/homeYardAssets.test.ts`
 - Create: `apps/game/src/game/maps/homeYardAssets.ts`
 - Modify: `apps/game/src/game/scenes/PreloaderScene.ts`
@@ -706,6 +706,7 @@ git commit -m "feat: load home yard map assets"
 ### Task 4: Gameplay Marker Parser
 
 **Files:**
+
 - Create: `apps/game/src/game/maps/homeYardMarkers.test.ts`
 - Create: `apps/game/src/game/maps/homeYardMarkers.ts`
 
@@ -814,7 +815,10 @@ export function readHomeYardMarkers(objectLayer: HomeYardObjectLayer): HomeYardM
   };
 }
 
-function readPointMarker(objectLayer: HomeYardObjectLayer, markerName: string): HomeYardPointMarker {
+function readPointMarker(
+  objectLayer: HomeYardObjectLayer,
+  markerName: string,
+): HomeYardPointMarker {
   const object = findRequiredMarker(objectLayer, markerName);
   const x = readRequiredNumber(object, markerName, "x");
   const y = readRequiredNumber(object, markerName, "y");
@@ -884,6 +888,7 @@ git commit -m "feat: read home yard map markers"
 ### Task 5: Phaser Map Creation In GameScene
 
 **Files:**
+
 - Create: `apps/game/src/game/maps/createHomeYardMap.ts`
 - Modify: `apps/game/src/game/scenes/GameScene.ts`
 - Modify: `apps/game/src/game/scenes/scenes.test.ts`
@@ -1058,6 +1063,7 @@ git commit -m "feat: render home yard map blockout"
 ### Task 6: Browser Verification And Final Checks
 
 **Files:**
+
 - No source files expected.
 - Use the local Vite dev server for visual verification.
 

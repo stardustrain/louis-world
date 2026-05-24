@@ -205,7 +205,7 @@ markers are logic coordinates, not visible game objects.
 - The Tiled layer structure separates visuals, collision intent, and gameplay
   markers.
 - The planned Phaser flow matches the repository's current `BootScene ->
-  PreloaderScene -> GameScene` structure.
+PreloaderScene -> GameScene` structure.
 - The plan can be followed with placeholder assets before real tilesets are
   downloaded.
 

@@ -143,6 +143,7 @@ future_index_candidates:
 ### LP-001: Scene 생명주기는 React component lifecycle과 다르게 봐야 한다
 
 Metadata:
+
 - Concepts: `phaser-scene`, `lifecycle`, `game-loop`
 - Related decisions: `BootScene -> PreloaderScene -> GameScene`
 - Transfer from frontend: `component lifecycle`, `resource loading`
@@ -159,15 +160,18 @@ In this project:
 이번 프로젝트에서는 이 개념이 어디에 적용됐는지 설명한다.
 
 Tradeoffs:
+
 - 선택지 A: 모든 scene이 필요한 asset을 직접 로드한다.
 - 선택지 B: 공용 asset은 preloader가 로드하고, scene 전용 asset만 각 scene이 로드한다.
 - 현재 선택: 선택지 B. 초기 구조가 단순하고 나중에 asset 소유권을 설명하기 쉽다.
 
 How to instruct Codex next time:
+
 - "공유 asset은 PreloaderScene에서 로드하고, scene 전용 asset은 해당 scene이 소유하게 해줘."
 - "Scene 전환 데이터와 전역 게임 상태를 분리해서 설계해줘."
 
 Questions to revisit:
+
 - 나중에 UI가 React로 붙으면 어떤 state가 scene 밖으로 나가야 하는가?
 ```
 

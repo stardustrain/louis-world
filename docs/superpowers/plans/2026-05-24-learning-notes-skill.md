@@ -20,6 +20,7 @@
 ### Task 1: Create `learning-notes` Skill
 
 **Files:**
+
 - Create: `.codex/skills/learning-notes/SKILL.md`
 
 - [x] **Step 1: Confirm the approved design**
@@ -46,7 +47,7 @@ Expected: command exits with status 0.
 
 Create `.codex/skills/learning-notes/SKILL.md` with exactly this content:
 
-```md
+````md
 ---
 name: learning-notes
 description: Use when the user wants to collect accepted learning points from a game design or implementation discussion and write them as one session-level raw Markdown note under docs/learning/raw for later concept-level reorganization.
@@ -88,6 +89,7 @@ Use this format:
 ```text
 학습 노트 후보: <one-sentence candidate>. 수락하면 이번 세션의 학습 포인트 목록에 넣겠습니다.
 ```
+````
 
 If the user accepts, remember the item in the conversation as an accepted learning point. Do not write a repo file yet.
 
@@ -159,6 +161,7 @@ future_index_candidates:
 ### LP-001: <learning point title>
 
 Metadata:
+
 - Concepts: `<concept-slug>`, `<concept-slug>`
 - Related decisions: `<decision summary>`
 - Transfer from frontend: `<frontend concept>`, `<frontend concept>`
@@ -175,15 +178,18 @@ In this project:
 이번 프로젝트에서는 이 개념이 어디에 적용됐는지 설명한다.
 
 Tradeoffs:
+
 - 선택지 A: <option>
 - 선택지 B: <option>
 - 현재 선택: <chosen option and reason>
 
 How to instruct Codex next time:
+
 - "<future instruction the user can reuse>"
 - "<future instruction the user can reuse>"
 
 Questions to revisit:
+
 - <question to revisit later>
 ```
 
@@ -248,7 +254,8 @@ Before claiming the note is complete, check:
 - Every `LP-###` has `How to instruct Codex next time`.
 - No large `docs/learning/README.md` was created.
 - No `docs/learning/concepts/` document was created.
-```
+
+````
 
 - [x] **Step 4: Verify the skill frontmatter**
 
@@ -256,7 +263,7 @@ Run:
 
 ```bash
 sed -n '1,30p' .codex/skills/learning-notes/SKILL.md
-```
+````
 
 Expected: output starts with `---`, includes `name: learning-notes`, includes `description:`, and closes the frontmatter with `---`.
 
@@ -265,6 +272,7 @@ Expected: output starts with `---`, includes `name: learning-notes`, includes `d
 ### Task 2: Verify And Commit
 
 **Files:**
+
 - Verify: `.codex/skills/learning-notes/SKILL.md`
 - Verify: `docs/superpowers/plans/2026-05-24-learning-notes-skill.md`
 
