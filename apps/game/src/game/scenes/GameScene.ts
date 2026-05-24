@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+import { createHomeYardMap } from "../maps/createHomeYardMap";
 import { DogPresenter } from "../objects/DogPresenter";
 import { applyDogMoodDelta, createInitialDogMood } from "../systems/dogReaction/dogMood";
 import type { DogMood } from "../systems/dogReaction/dogReactionTypes";
@@ -16,14 +17,12 @@ export class GameScene extends Phaser.Scene {
   }
 
   create(): void {
-    const centerX = this.scale.width / 2;
-    const centerY = this.scale.height / 2;
-
-    this.cameras.main.setBackgroundColor("#18233f");
-    this.add.circle(centerX, centerY + 88, 260, 0x24304f, 0.7);
-    this.add.circle(centerX + 220, centerY - 180, 52, 0xfde68a, 0.88);
-
-    const dogPresenter = new DogPresenter(this, centerX, centerY + 72);
+    const homeYardMap = createHomeYardMap(this);
+    const dogPresenter = new DogPresenter(
+      this,
+      homeYardMap.markers.dogSpawn.x,
+      homeYardMap.markers.dogSpawn.y,
+    );
 
     dogPresenter.getInteractiveObject().on("pointerdown", () => {
       const event = getPetInteractionEvent({ pointerDown: true, target: "dog" });
@@ -36,5 +35,24 @@ export class GameScene extends Phaser.Scene {
       this.dogMood = applyDogMoodDelta(this.dogMood, reaction.moodDelta);
       dogPresenter.presentReaction(reaction);
     });
+
+    if (import.meta.env.DEV) {
+      addDebugMarker(
+        this,
+        homeYardMap.markers.playerSpawn.x,
+        homeYardMap.markers.playerSpawn.y,
+        0x38bdf8,
+      );
+      addDebugMarker(
+        this,
+        homeYardMap.markers.dogSpawn.x,
+        homeYardMap.markers.dogSpawn.y,
+        0xfacc15,
+      );
+    }
   }
+}
+
+function addDebugMarker(scene: Phaser.Scene, x: number, y: number, color: number): void {
+  scene.add.circle(x, y, 8, color, 0.9).setDepth(100);
 }

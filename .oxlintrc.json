@@ -4,6 +4,7 @@
     "dist/**",
     "coverage/**",
     "apps/*/dist/**",
-    "apps/*/coverage/**"
+    "apps/*/coverage/**",
+    "docs/**"
   ]
 }

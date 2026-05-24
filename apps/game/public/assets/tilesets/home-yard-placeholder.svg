@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="224" height="32" viewBox="0 0 224 32">
+  <rect width="100%" height="100%" fill="#111827" />
+  <rect x="0" y="0" width="32" height="32" fill="#233647" />
+  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="16" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">GRD</text>
+  <rect x="32" y="0" width="32" height="32" fill="#3d6f5d" />
+  <rect x="33" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="48" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">YRD</text>
+  <rect x="64" y="0" width="32" height="32" fill="#b9a56b" />
+  <rect x="65" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="80" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">PTH</text>
+  <rect x="96" y="0" width="32" height="32" fill="#7c5a4a" />
+  <rect x="97" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="112" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">HSE</text>
+  <rect x="128" y="0" width="32" height="32" fill="#89c6a3" />
+  <rect x="129" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="144" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">DEC</text>
+  <rect x="160" y="0" width="32" height="32" fill="#ef4444" />
+  <rect x="161" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="176" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">BLK</text>
+  <rect x="192" y="0" width="32" height="32" fill="#8b5cf6" />
+  <rect x="193" y="1" width="30" height="30" fill="none" stroke="#f8fafc" stroke-opacity="0.35" />
+  <text x="208" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" paint-order="stroke fill">LCK</text>
+</svg>

@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+import { preloadHomeYardMapAssets } from "../maps/homeYardAssets";
 import { GameScene } from "./GameScene";
 
 export class PreloaderScene extends Phaser.Scene {
@@ -11,6 +12,7 @@ export class PreloaderScene extends Phaser.Scene {
 
   preload(): void {
     this.load.setPath("assets");
+    preloadHomeYardMapAssets(this.load);
   }
 
   create(): void {
