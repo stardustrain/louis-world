@@ -85,11 +85,12 @@ These guidelines are working if there are fewer unnecessary changes in diffs, fe
 - Don't use meaningless variable names. Use variable names that are long enough to convey meaning.
 
 - Even if there is nothing to return, the curly braces must be present.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 // listPageCachePolicy.ts
 export const listPageCachePolicy = (a: string) => {
-  if (typeof a !== "string") return
+  if (typeof a !== "string") return;
 };
 
 // ✅ ALWAYS GENERATE THIS EXACT PATTERN
@@ -118,6 +119,7 @@ export const listPageCachePolicy = (a: string) => {
 ```
 
 - Put functions that export at the top and functions that don't export at the bottom. We use function declarations to do this.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 // listPageCachePolicy.ts
@@ -133,15 +135,15 @@ export const listPageCachePolicy = () => ({
 // listPageCachePolicy.ts
 export function listPageCachePolicy() {
   return {
-    "Cache-Control": ["public", "s-maxage=0", "max-age=0"].join(", ")
+    "Cache-Control": ["public", "s-maxage=0", "max-age=0"].join(", "),
   };
-};
+}
 
 function detailPageCachePolicy() {
   return {
-    "Cache-Control": ["public", "s-maxage=0", "max-age=0"].join(", ")
+    "Cache-Control": ["public", "s-maxage=0", "max-age=0"].join(", "),
   };
-};
+}
 ```
 
 - Preferably, only one named export from one file. However, multiple exports are allowed when they have similar roles or are needed together to perform a specific function.
@@ -163,6 +165,7 @@ export function calculateDiscount(price: number) {
 ```
 
 **Why is this wrong?**
+
 - `getCurrentDate`, `generateRandomId`, `calculateDiscount` are completely independent
 - Using one doesn't require the others
 - No common role or domain
@@ -189,6 +192,7 @@ export function calculateDiscount(price: number) {
 - When functions have similar roles or are needed together, you can use one of these methods:
 
 **Method A: Bundle as object**
+
 ```typescript
 // ✅ ACCEPTABLE: Related functions bundled as object
 // dateUtils.ts - Date-related utilities
@@ -204,6 +208,7 @@ export const dateUtils = {
 ```
 
 **Method B: Direct exports (when closely related)**
+
 ```typescript
 // ✅ ACCEPTABLE: Similar roles or needed together
 // packages/uikit/src/ChatMessage/errors/types.ts
@@ -217,19 +222,19 @@ export type MessageSendErrorCode =
 
 export type MessageError = MessageSendError | MessageResendError | Error;
 
-export type OnMessageErrorCallback = (args: {
-  error: MessageError;
-}) => void;
+export type OnMessageErrorCallback = (args: { error: MessageError }) => void;
 ```
 
 **Why is this allowed?**
+
 - All serve a single role: "message error handling"
 - Error code constants, types, and callbacks are used together
 - External code imports these together when handling errors
 
 **Real-world allowed cases** (examples only, not exhaustive):
 
-*Case 1: types.ts files*
+_Case 1: types.ts files_
+
 ```typescript
 // packages/uikit/src/ChatMessage/errors/types.ts
 export const messageSendErrorCodes = { ... } as const;
@@ -237,50 +242,59 @@ export type MessageSendErrorCode = ...;
 export type MessageError = ...;
 export type OnMessageErrorCallback = ...;
 ```
+
 → Common domain: "message errors", used together
 
-*Case 2: Provider + Hooks*
+_Case 2: Provider + Hooks_
+
 ```typescript
 // packages/uikit/src/ChatMessage/MessageProvider.tsx
 export function MessageProvider({ children, onError }) { ... }
 export const useMessageStateInternal = () => { ... }
 export const useMessageActionsInternal = () => { ... }
 ```
+
 → Provider and hooks needed together for "message functionality"
 
-*Case 3: Error class + Type guard*
+_Case 3: Error class + Type guard_
+
 ```typescript
 // packages/uikit/src/ChatMessage/errors/MessageSendError.ts
 export class MessageSendError extends Error { ... }
 export function isMessageSendError(error: unknown): error is MessageSendError { ... }
 ```
+
 → Error class and type guard always form a pair
 
 **Decision criteria:**
 
 ✅ **Multiple exports allowed when:**
+
 - Used together? (importing one often requires importing the others)
 - Same role/domain? (share a common purpose or concern)
 - Dependency relationship? (one item doesn't work without the others)
 
 ❌ **Multiple exports prohibited when:**
+
 - Features are completely independent
 - Items belong to different domains/concerns
 - No reason to use them together
 
 - The names of values that are elements of an object should be written so that they are naturally associated with the name of the object.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
-export const user = { getUserName: "Timothy", };
+export const user = { getUserName: "Timothy" };
 user.getUserName;
 
 // ✅ ALWAYS GENERATE THIS EXACT PATTERN
-export const user = { name: "Timothy", };
+export const user = { name: "Timothy" };
 
 user.name;
 ```
 
 - Functions that are elements of an object should have names that imply that they are functions.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 export const user = {
@@ -298,6 +312,7 @@ user.getUserName();
 ```
 
 - The name of the function you export and the name of the file match.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 // cachePolicy.ts
@@ -307,7 +322,7 @@ export const otherName = () => ({
   },
   listPage: {
     "Cache-Control": ["no-store", "no-cache", "must-revalidate"].join(", "),
-  }
+  },
 });
 
 // ✅ ALWAYS GENERATE THIS EXACT PATTERN
@@ -318,17 +333,15 @@ export const cachePolicy = () => ({
   },
   listPage: {
     "Cache-Control": ["no-store", "no-cache", "must-revalidate"].join(", "),
-  }
+  },
 });
 ```
 
 - The parameters of all functions **MUST** be declared as destructed object.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
-export function preprocessor(
-  files,
-  options = {},
-): Promise<File[]> {
+export function preprocessor(files, options = {}): Promise<File[]> {
   return processFiles({ files, options });
 }
 
@@ -337,15 +350,13 @@ type PreprocessorParams = {
   files: File[];
   options?: PreprocessorOptions;
 };
-export function preprocessor({
-  files,
-  options = {},
-}: PreprocessorParams): Promise<File[]> {
+export function preprocessor({ files, options = {} }: PreprocessorParams): Promise<File[]> {
   return processFiles({ files, options });
 }
 ```
 
 - **Exception: Type guards** — TypeScript type guard functions (`value is Type`) require the parameter name to match the `is` predicate. For type guards, plain parameters are allowed.
+
 ```typescript
 // ✅ ACCEPTABLE: Type guard requires plain parameter for type narrowing
 export function isResourceType(value: string): value is ResourceType {
@@ -354,6 +365,7 @@ export function isResourceType(value: string): value is ResourceType {
 ```
 
 - **Exception: Exhaustiveness check helpers** — Helpers that exist to surface a `never` type at compile time (e.g., `assertNever`) take a single positional `never` parameter. The whole point is the call site `throw assertNever(value)` reading naturally; wrapping the value in an object adds noise without improving type safety. For these helpers, plain parameters are allowed.
+
 ```typescript
 // ✅ ACCEPTABLE: Exhaustiveness check helper takes a plain never parameter
 export function assertNever(value: never): never {
@@ -362,6 +374,7 @@ export function assertNever(value: never): never {
 ```
 
 - When refactoring a function or writing a replacement function, the interface (the type of the function's parameters and return values) MUST remain the same.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 /**
@@ -374,15 +387,15 @@ export const getMessagePrimaryKey = ({
     id: string;
     channelId: string;
   };
-}): MessagePrimaryKey =>
-  MessagePrimaryKey.fromMessage(message);
+}): MessagePrimaryKey => MessagePrimaryKey.fromMessage(message);
 
 export const MessagePrimaryKey = {
   /**
    * 메시지 객체로부터 MessagePrimaryKey를 생성합니다
    * @throws {Error} id 또는 channelId가 없거나 빈 값일 경우
    */
-  fromMessage(message: { id: string; channelId: string }): MessagePrimaryKey { // BROKEN interface
+  fromMessage(message: { id: string; channelId: string }): MessagePrimaryKey {
+    // BROKEN interface
     // ...
     return MessagePrimaryKey.create({
       channelId: validatedMessage.output.message.channelId,
@@ -402,15 +415,15 @@ export const getMessagePrimaryKey = ({
     id: string;
     channelId: string;
   };
-}): MessagePrimaryKey =>
-  MessagePrimaryKey.fromMessage(message);
+}): MessagePrimaryKey => MessagePrimaryKey.fromMessage(message);
 
 export const MessagePrimaryKey = {
   /**
    * 메시지 객체로부터 MessagePrimaryKey를 생성합니다
    * @throws {Error} id 또는 channelId가 없거나 빈 값일 경우
    */
-  fromMessage({ message }: { message: { id: string; channelId: string }}): MessagePrimaryKey { // KEEP interface
+  fromMessage({ message }: { message: { id: string; channelId: string } }): MessagePrimaryKey {
+    // KEEP interface
     // ...
     return MessagePrimaryKey.create({
       channelId: validatedMessage.output.message.channelId,
@@ -421,6 +434,7 @@ export const MessagePrimaryKey = {
 ```
 
 - The signature declaration of a function must be declared as destructed object.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 export type PreprocessorProgressCallback = (
@@ -441,6 +455,7 @@ export type PreprocessorProgressCallback = (args: {
 
 - You should write an "@fileoverview" comments at the **top of the file** where generic functions and hooks that are not React components are declared.
 - "@fileoverview" comments are designed to guide readers unfamiliar with your code through the contents of this file. You can provide a description of the file contents and dependency or compatibility information, if any.
+
 ```typescript
 /**
  * @fileoverview 메시지를 전송합니다.
@@ -455,7 +470,9 @@ export async function sendMessage() {
   // ...
 }
 ```
+
 - All interface and function comments must conform to the style of the jsdoc.
+
 ```typescript
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 /**
@@ -487,6 +504,7 @@ interface ConversionConfig {
 - Test code must exist for the function you are exporting, and you create a file containing the test code in the same path as the file where the function exists.
 - Name the test file ${NAME_OF_THE_FILE_TO_BE_TESTED_WITHOUT_EXT}.test.ts.
 - The filename of the test code must contain the filename of the test target and include `test`.
+
 ```
 // ❌ NEVER GENERATE THIS CODE - IT WILL BREAK THE APPLICATION
 cachePolicy.ts
@@ -603,9 +621,7 @@ function getStatusLabel({ status }: { status: SendingStatus }): string {
 
 ```typescript
 // ✅ ACCEPTABLE: Redux reducer follows the library convention
-type CounterAction =
-  | { type: "increment" }
-  | { type: "decrement" };
+type CounterAction = { type: "increment" } | { type: "decrement" };
 
 function counterReducer(state: number, action: CounterAction): number {
   switch (action.type) {
@@ -647,6 +663,7 @@ export function handleMessageError({ message }: { message: ChatMessage }) {
 ```
 
 **Why is this wrong?**
+
 - `ChatMessage.ts` imports from `messageErrorHandler.ts`, which imports back from `ChatMessage.ts` — a 2-module cycle.
 - Module evaluation order is non-deterministic at the cycle edge; one side's exports can be `undefined` at the moment the other side reads them.
 - Even if today's code happens to evaluate in a working order, adding any consumer between them flips the order and breaks production.

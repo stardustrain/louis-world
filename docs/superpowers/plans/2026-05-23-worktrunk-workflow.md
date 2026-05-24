@@ -26,6 +26,7 @@
 ### Task 1: Worktrunk 프로젝트 설정 추가
 
 **Files:**
+
 - Create: `.config/wt.toml`
 
 - [ ] **Step 1: 현재 설정 부재 확인**
@@ -136,6 +137,7 @@ Expected: `alias` appears in the `wt config` subcommands list.
 ### Task 2: 설정 검증
 
 **Files:**
+
 - Verify: `.config/wt.toml`
 
 - [ ] **Step 1: 위험한 command가 없는지 확인**

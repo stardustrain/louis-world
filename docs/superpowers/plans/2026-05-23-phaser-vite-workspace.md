@@ -43,6 +43,7 @@
 ### Task 1: Root Workspace Metadata
 
 **Files:**
+
 - Create: `.node-version`
 - Create: `package.json`
 - Create: `pnpm-workspace.yaml`
@@ -182,6 +183,7 @@ git commit -m "chore: add workspace metadata"
 ### Task 2: Game App Package And Tool Config
 
 **Files:**
+
 - Create: `apps/game/package.json`
 - Create: `apps/game/index.html`
 - Create: `apps/game/tsconfig.json`
@@ -338,6 +340,7 @@ git commit -m "chore: add game app tool config"
 ### Task 3: Dependencies And Lockfile
 
 **Files:**
+
 - Modify: `package.json`
 - Modify: `apps/game/package.json`
 - Create: `pnpm-lock.yaml`
@@ -405,6 +408,7 @@ git commit -m "chore: install game app dependencies"
 ### Task 4: Source Guidance And Empty Boundaries
 
 **Files:**
+
 - Create: `apps/game/src/AGENTS.md`
 - Create: `apps/game/public/assets/images/.gitkeep`
 - Create: `apps/game/public/assets/audio/.gitkeep`
@@ -467,6 +471,7 @@ git commit -m "docs: add game source guidance"
 ### Task 5: Phaser Scene Classes
 
 **Files:**
+
 - Create: `apps/game/src/game/scenes/scenes.test.ts`
 - Create: `apps/game/src/game/scenes/BootScene.ts`
 - Create: `apps/game/src/game/scenes/PreloaderScene.ts`
@@ -614,6 +619,7 @@ git commit -m "feat: add initial Phaser scenes"
 ### Task 6: Phaser Config And Game Bootstrap
 
 **Files:**
+
 - Create: `apps/game/src/game/createGame.test.ts`
 - Create: `apps/game/src/game/config.ts`
 - Create: `apps/game/src/game/createGame.ts`
@@ -789,6 +795,7 @@ git commit -m "feat: add Phaser game bootstrap"
 ### Task 7: Browser Entry, Styling, And Final Verification
 
 **Files:**
+
 - Create: `apps/game/src/main.ts`
 - Create: `apps/game/src/style.css`
 - Modify: files formatted by `pnpm format`

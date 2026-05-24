@@ -30,6 +30,7 @@ The external brief is source material only. Do not copy it into the repository.
 ### Task 1: Create `vision.md`
 
 **Files:**
+
 - Create: `docs/game/vision.md`
 
 - [ ] **Step 1: Create the `docs/game` directory**
@@ -46,7 +47,7 @@ Expected: command exits with status 0.
 
 Create `docs/game/vision.md` with exactly this content:
 
-```md
+````md
 # 게임 비전
 
 이 문서는 게임의 핵심 방향을 정리하는 정본 문서다.
@@ -83,6 +84,7 @@ Create `docs/game/vision.md` with exactly this content:
 -> 강아지와 함께 잠듦
 -> 작은 하루 보상
 ```
+````
 
 반복의 핵심은 보상 크기가 아니라 강아지의 반응 변화다.
 
@@ -120,7 +122,8 @@ Create `docs/game/vision.md` with exactly this content:
 - 이 선택이 반복 행동을 노동이 아니라 애정 표현처럼 만드는가?
 - 이 선택이 하루의 끝에 작은 만족감을 주는가?
 - 이 선택이 초기 프로토타입 범위를 불필요하게 키우지 않는가?
-```
+
+````
 
 - [ ] **Step 3: Verify `vision.md` exists and has the expected title**
 
@@ -128,7 +131,7 @@ Run:
 
 ```bash
 sed -n '1,20p' docs/game/vision.md
-```
+````
 
 Expected: output starts with `# 게임 비전`.
 
@@ -148,13 +151,14 @@ Expected: commit succeeds and includes only `docs/game/vision.md`.
 ### Task 2: Create `world.md`
 
 **Files:**
+
 - Create: `docs/game/world.md`
 
 - [ ] **Step 1: Create `world.md`**
 
 Create `docs/game/world.md` with exactly this content:
 
-```md
+````md
 # 세계관
 
 이 문서는 별나라의 톤, 첫 공간, 표현 규칙, 피해야 할 방향을 정리하는 정본 문서다.
@@ -204,16 +208,16 @@ Create `docs/game/world.md` with exactly this content:
 
 현실의 강아지 돌봄 행동은 별나라의 신비한 표현으로 바꿀 수 있다.
 
-| 현실 행동 | 별나라식 표현 |
-| --- | --- |
-| 밥 주기 | 별빛 알갱이나 따뜻한 별죽을 밥그릇에 채움 |
-| 공 던지기 | 작은 유성 공을 마당에 던짐 |
-| 산책 | 달빛 풀밭, 구름다리, 반짝이는 언덕을 걷기 |
-| 쓰다듬기 | 강아지 털 주변에 작은 별빛이 피어남 |
-| 잠자기 | 하늘에 둘만의 작은 별자리가 생김 |
-| 장난감 | 유성 조각, 구름 솜뭉치, 달조개 방울 |
-| 물그릇 | 별샘에서 뜬 물 |
-| 집 | 별빛이 새어 들어오는 작은 오두막 |
+| 현실 행동 | 별나라식 표현                             |
+| --------- | ----------------------------------------- |
+| 밥 주기   | 별빛 알갱이나 따뜻한 별죽을 밥그릇에 채움 |
+| 공 던지기 | 작은 유성 공을 마당에 던짐                |
+| 산책      | 달빛 풀밭, 구름다리, 반짝이는 언덕을 걷기 |
+| 쓰다듬기  | 강아지 털 주변에 작은 별빛이 피어남       |
+| 잠자기    | 하늘에 둘만의 작은 별자리가 생김          |
+| 장난감    | 유성 조각, 구름 솜뭉치, 달조개 방울       |
+| 물그릇    | 별샘에서 뜬 물                            |
+| 집        | 별빛이 새어 들어오는 작은 오두막          |
 
 ## 표현해도 되는 것
 
@@ -245,6 +249,7 @@ Create `docs/game/world.md` with exactly this content:
 별나라의 신비함: 20%
 스토리와 미스터리: 10%
 ```
+````
 
 별나라는 강아지와 보내는 하루를 특별하게 만드는 장소여야 한다.
 
@@ -255,7 +260,8 @@ Create `docs/game/world.md` with exactly this content:
 - 주인공과 강아지가 돌아가고 싶어 하는지
 - 다른 주민이 언제 등장하는지
 - 별자리가 단순 연출인지, 수집이나 진행 시스템인지
-```
+
+````
 
 - [ ] **Step 2: Verify `world.md` exists and has the expected title**
 
@@ -263,7 +269,7 @@ Run:
 
 ```bash
 sed -n '1,20p' docs/game/world.md
-```
+````
 
 Expected: output starts with `# 세계관`.
 
@@ -283,13 +289,14 @@ Expected: commit succeeds and includes only `docs/game/world.md`.
 ### Task 3: Create `characters.md`
 
 **Files:**
+
 - Create: `docs/game/characters.md`
 
 - [ ] **Step 1: Create `characters.md`**
 
 Create `docs/game/characters.md` with exactly this content:
 
-```md
+````md
 # 캐릭터
 
 이 문서는 주인공, 강아지, 둘의 관계, 이후 NPC 추가 기준을 정리하는 정본 문서다.
@@ -321,6 +328,7 @@ Create `docs/game/characters.md` with exactly this content:
 처음 보는 곳인데도 잘했어.
 오늘은 여기서 쉬자.
 ```
+````
 
 ## 강아지
 
@@ -391,13 +399,13 @@ NPC를 추가한다면 설명을 많이 하는 존재보다, 주인공과 강아
 
 가능한 방향은 다음과 같다.
 
-| NPC 유형 | 역할 | 톤 |
-| --- | --- | --- |
-| 말하는 별나무 | 첫 공간의 조용한 안내자 | 느리고 따뜻함 |
-| 달빛 우체통 | 짧은 편지나 튜토리얼 전달 | 짧고 귀여움 |
-| 별나비 무리 | 강아지 호기심 유발 | 말 없음 |
-| 졸린 달토끼 | 이후 만나는 주민 | 느긋함 |
-| 구름 상인 | 장난감이나 장식 판매 | 밝지만 과하지 않음 |
+| NPC 유형      | 역할                      | 톤                 |
+| ------------- | ------------------------- | ------------------ |
+| 말하는 별나무 | 첫 공간의 조용한 안내자   | 느리고 따뜻함      |
+| 달빛 우체통   | 짧은 편지나 튜토리얼 전달 | 짧고 귀여움        |
+| 별나비 무리   | 강아지 호기심 유발        | 말 없음            |
+| 졸린 달토끼   | 이후 만나는 주민          | 느긋함             |
+| 구름 상인     | 장난감이나 장식 판매      | 밝지만 과하지 않음 |
 
 ## NPC가 지켜야 할 선
 
@@ -412,7 +420,8 @@ NPC를 추가한다면 설명을 많이 하는 존재보다, 주인공과 강아
 - 강아지의 이름
 - 강아지의 최종 2D 비율과 애니메이션 스타일
 - 첫 NPC를 실제로 넣을지 여부
-```
+
+````
 
 - [ ] **Step 2: Verify `characters.md` exists and has the expected title**
 
@@ -420,7 +429,7 @@ Run:
 
 ```bash
 sed -n '1,20p' docs/game/characters.md
-```
+````
 
 Expected: output starts with `# 캐릭터`.
 
@@ -440,13 +449,14 @@ Expected: commit succeeds and includes only `docs/game/characters.md`.
 ### Task 4: Create `scenario.md`
 
 **Files:**
+
 - Create: `docs/game/scenario.md`
 
 - [ ] **Step 1: Create `scenario.md`**
 
 Create `docs/game/scenario.md` with exactly this content:
 
-```md
+````md
 # 시나리오
 
 이 문서는 이야기의 시작과 첫 플레이 하루를 정리하는 정본 문서다.
@@ -474,6 +484,7 @@ Create `docs/game/scenario.md` with exactly this content:
 6. 강아지가 먼저 일어나 주인공에게 다가와 꼬리를 흔든다.
 7. 여기서 첫 플레이가 시작된다.
 ```
+````
 
 프롤로그는 큰 위기보다 낯섦과 안심감을 남겨야 한다.
 
@@ -614,7 +625,8 @@ Create `docs/game/scenario.md` with exactly this content:
 - 첫날 전에 프롤로그를 플레이 가능한 장면으로 만들지 여부
 - 별자리가 시스템인지 연출인지 여부
 - 장기적으로 돌아가는 방법을 찾는 이야기를 넣을지 여부
-```
+
+````
 
 - [ ] **Step 2: Verify `scenario.md` exists and has the expected title**
 
@@ -622,7 +634,7 @@ Run:
 
 ```bash
 sed -n '1,20p' docs/game/scenario.md
-```
+````
 
 Expected: output starts with `# 시나리오`.
 
@@ -642,6 +654,7 @@ Expected: commit succeeds and includes only `docs/game/scenario.md`.
 ### Task 5: Update Agent Guidance
 
 **Files:**
+
 - Modify: `AGENTS.md`
 
 - [ ] **Step 1: Read the current `AGENTS.md`**
@@ -700,6 +713,7 @@ Expected: commit succeeds and includes only `AGENTS.md`.
 ### Task 6: Final Verification
 
 **Files:**
+
 - Verify: `docs/game/vision.md`
 - Verify: `docs/game/world.md`
 - Verify: `docs/game/characters.md`
