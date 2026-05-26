@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="player token">
+  <circle cx="12" cy="12" r="10" fill="#38bdf8" stroke="#0f172a" stroke-width="2" />
+  <path d="M12 3 L15 8 H9 Z" fill="#f8fafc" />
+  <circle cx="12" cy="13" r="3" fill="#0f172a" opacity="0.2" />
+</svg>

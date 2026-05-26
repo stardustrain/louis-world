@@ -1,43 +1,76 @@
 import Phaser from "phaser";
 
+import {
+  CHARACTER_BODY_SIZE,
+  CHARACTER_TOKEN_SIZE,
+  DOG_TOKEN_TEXTURE_KEY,
+} from "./characterTokenAssets";
+import type { DogFollowIntent } from "../systems/dogFollow/dogFollow";
 import type { DogReactionRequest } from "../systems/dogReaction/dogReactionTypes";
 import { resolveDogPresentationStyle } from "./dogPresentationStyle";
 
 export class DogPresenter {
   private readonly scene: Phaser.Scene;
-  private readonly container: Phaser.GameObjects.Container;
-  private readonly body: Phaser.GameObjects.Ellipse;
-  private readonly face: Phaser.GameObjects.Text;
+  private readonly ring: Phaser.GameObjects.Ellipse;
+  private readonly sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  private clearTintTimer: Phaser.Time.TimerEvent | undefined;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     this.scene = scene;
-    this.body = scene.add.ellipse(0, 0, 144, 96, 0xcbd5e1).setStrokeStyle(4, 0x64748b);
-    this.face = scene.add
-      .text(0, -2, ":|", {
-        color: "#0f172a",
-        fontFamily: "system-ui, sans-serif",
-        fontSize: "32px",
-      })
-      .setOrigin(0.5);
-    this.container = scene.add.container(x, y, [this.body, this.face]);
-
-    this.container.setSize(168, 120);
-    this.container.setInteractive(
-      new Phaser.Geom.Rectangle(-84, -60, 168, 120),
-      Phaser.Geom.Rectangle.Contains,
-    );
+    this.ring = scene.add.ellipse(x, y, CHARACTER_TOKEN_SIZE + 6, CHARACTER_TOKEN_SIZE + 6);
+    this.ring.setDepth(29);
+    this.ring.setStrokeStyle(2, 0x94a3b8);
+    this.sprite = scene.physics.add.sprite(x, y, DOG_TOKEN_TEXTURE_KEY);
+    this.sprite.setDisplaySize(CHARACTER_TOKEN_SIZE, CHARACTER_TOKEN_SIZE);
+    this.sprite.setDepth(30);
+    this.sprite.setCollideWorldBounds(true);
+    this.sprite.setPushable(false);
+    this.sprite.body.setAllowGravity(false);
+    this.sprite.body.setSize(CHARACTER_BODY_SIZE, CHARACTER_BODY_SIZE, true);
+    this.sprite.setInteractive();
+    this.scene.events.on(Phaser.Scenes.Events.POST_UPDATE, this.syncRingPosition, this);
+    this.scene.events.once(Phaser.Scenes.Events.SHUTDOWN, this.stopSyncingRingPosition, this);
   }
 
-  getInteractiveObject(): Phaser.GameObjects.Container {
-    return this.container;
+  getInteractiveObject(): Phaser.GameObjects.GameObject {
+    return this.sprite;
+  }
+
+  getPhysicsObject(): Phaser.Types.Physics.Arcade.SpriteWithDynamicBody {
+    return this.sprite;
+  }
+
+  getPosition(): Phaser.Math.Vector2 {
+    return new Phaser.Math.Vector2(this.sprite.x, this.sprite.y);
+  }
+
+  applyFollowIntent(intent: DogFollowIntent): void {
+    this.syncRingPosition();
+    this.sprite.setVelocity(intent.velocity.x, intent.velocity.y);
   }
 
   presentReaction(request: DogReactionRequest): void {
     const style = resolveDogPresentationStyle(request);
 
-    this.body.setFillStyle(style.bodyColor);
-    this.body.setStrokeStyle(4, style.bodyStrokeColor);
-    this.face.setText(style.faceText);
+    this.syncRingPosition();
+    this.sprite.setTint(style.tokenTintColor);
+    this.ring.setStrokeStyle(2, style.ringStrokeColor);
+    this.scene.tweens.add({
+      duration: 180,
+      ease: "Sine.easeOut",
+      onComplete: () => {
+        this.sprite.setScale(1);
+      },
+      scaleX: 1.15,
+      scaleY: 1.15,
+      targets: this.sprite,
+      yoyo: true,
+    });
+    this.clearTintTimer?.remove(false);
+    this.clearTintTimer = this.scene.time.delayedCall(450, () => {
+      this.sprite.clearTint();
+      this.clearTintTimer = undefined;
+    });
 
     if (style.effectEnabled) {
       this.showStarlightBloom(style.effectColor, style.effectParticleCount);
@@ -47,24 +80,33 @@ export class DogPresenter {
   private showStarlightBloom(effectColor: number, particleCount: number): void {
     for (let index = 0; index < particleCount; index += 1) {
       const angle = (Math.PI * 2 * index) / particleCount;
-      const startX = this.container.x + Math.cos(angle) * 54;
-      const startY = this.container.y + Math.sin(angle) * 36;
-      const endX = this.container.x + Math.cos(angle) * 82;
-      const endY = this.container.y + Math.sin(angle) * 58;
-      const particle = this.scene.add.circle(startX, startY, 4, effectColor, 0.9);
+      const startX = this.sprite.x + Math.cos(angle) * 12;
+      const startY = this.sprite.y + Math.sin(angle) * 12;
+      const endX = this.sprite.x + Math.cos(angle) * 22;
+      const endY = this.sprite.y + Math.sin(angle) * 22;
+      const particle = this.scene.add.circle(startX, startY, 2, effectColor, 0.9);
 
+      particle.setDepth(35);
       this.scene.tweens.add({
-        targets: particle,
-        x: endX,
-        y: endY,
         alpha: 0,
-        scale: 0.3,
         duration: 600,
         ease: "Sine.easeOut",
         onComplete: () => {
           particle.destroy();
         },
+        scale: 0.3,
+        targets: particle,
+        x: endX,
+        y: endY,
       });
     }
+  }
+
+  private syncRingPosition(): void {
+    this.ring.setPosition(this.sprite.x, this.sprite.y);
+  }
+
+  private stopSyncingRingPosition(): void {
+    this.scene.events.off(Phaser.Scenes.Events.POST_UPDATE, this.syncRingPosition, this);
   }
 }

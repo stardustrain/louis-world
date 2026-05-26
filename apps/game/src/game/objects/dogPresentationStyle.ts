@@ -9,9 +9,8 @@ export type DogPresentationRequest =
     };
 
 export type DogPresentationStyle = {
-  faceText: string;
-  bodyColor: number;
-  bodyStrokeColor: number;
+  tokenTintColor: number;
+  ringStrokeColor: number;
   effectEnabled: boolean;
   effectColor: number;
   effectParticleCount: number;
@@ -21,25 +20,28 @@ export function resolveDogPresentationStyle(request: DogPresentationRequest): Do
   const effectEnabled = request.effect === "starlight_bloom";
 
   return {
-    faceText: resolveFaceText(request.expression),
-    bodyColor: 0xf8fafc,
-    bodyStrokeColor: effectEnabled ? 0xfacc15 : 0x94a3b8,
+    tokenTintColor: resolveTokenTintColor(request.expression, effectEnabled),
+    ringStrokeColor: effectEnabled ? 0xfacc15 : 0x94a3b8,
     effectEnabled,
     effectColor: 0xfde68a,
     effectParticleCount: resolveEffectParticleCount(request.intensity, effectEnabled),
   };
 }
 
-function resolveFaceText(expression: string): string {
+function resolveTokenTintColor(expression: string, effectEnabled: boolean): number {
+  if (!effectEnabled) {
+    return 0xf8fafc;
+  }
+
   if (expression === "cautious_to_relaxed") {
-    return ":)";
+    return 0xfef3c7;
   }
 
   if (expression === "relaxed") {
-    return ":)";
+    return 0xfef3c7;
   }
 
-  return ":)";
+  return 0xf8fafc;
 }
 
 function resolveEffectParticleCount(intensity: string, effectEnabled: boolean): number {
