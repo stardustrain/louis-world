@@ -1,0 +1,116 @@
+{
+  "frames": {
+    "asteroid_01": {
+      "frame": { "x": 0, "y": 224, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "asteroid_02": {
+      "frame": { "x": 34, "y": 226, "w": 60, "h": 30 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 60, "h": 30 },
+      "sourceSize": { "w": 60, "h": 30 }
+    },
+    "asteroid_03": {
+      "frame": { "x": 100, "y": 232, "w": 25, "h": 18 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 25, "h": 18 },
+      "sourceSize": { "w": 25, "h": 18 }
+    },
+    "asteroid_04": {
+      "frame": { "x": 137, "y": 235, "w": 13, "h": 11 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 13, "h": 11 },
+      "sourceSize": { "w": 13, "h": 11 }
+    },
+    "dwarf_star_01": {
+      "frame": { "x": 128, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "dwarf_star_02": {
+      "frame": { "x": 160, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "dwarf_star_03": {
+      "frame": { "x": 192, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "dwarf_star_04": {
+      "frame": { "x": 224, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "moon_01": {
+      "frame": { "x": 0, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "moon_02": {
+      "frame": { "x": 32, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "moon_03": {
+      "frame": { "x": 64, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "moon_04": {
+      "frame": { "x": 96, "y": 192, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 }
+    },
+    "star_cluster_01": {
+      "frame": { "x": 160, "y": 225, "w": 32, "h": 31 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 31 },
+      "sourceSize": { "w": 32, "h": 31 }
+    },
+    "star_cluster_02": {
+      "frame": { "x": 196, "y": 229, "w": 27, "h": 25 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 25 },
+      "sourceSize": { "w": 27, "h": 25 }
+    },
+    "star_cluster_03": {
+      "frame": { "x": 224, "y": 224, "w": 32, "h": 30 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 30 },
+      "sourceSize": { "w": 32, "h": 30 }
+    }
+  },
+  "meta": {
+    "app": "louis-world",
+    "format": "RGBA8888",
+    "image": "celestial-objects.png",
+    "scale": "1",
+    "size": { "w": 384, "h": 256 }
+  }
+}

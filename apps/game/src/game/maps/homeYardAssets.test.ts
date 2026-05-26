@@ -1,30 +1,30 @@
-import { describe, expect, it } from "vitest";
-
 import { preloadHomeYardMapAssets } from "./homeYardAssets";
 
-type LoaderCall = {
-  readonly method: string;
-  readonly key: string;
-  readonly url: string;
-  readonly width?: number;
-  readonly height?: number;
-};
+type LoaderCall =
+  | {
+      readonly key: string;
+      readonly method: "tilemapTiledJSON" | "image";
+      readonly url: string;
+    }
+  | {
+      readonly atlasURL: string;
+      readonly key: string;
+      readonly method: "atlas";
+      readonly textureURL: string;
+    };
 
 describe("preloadHomeYardMapAssets", () => {
-  it("queues the approved Tiled map and placeholder tileset", () => {
+  it("queues the approved Tiled map, Star Realms PNG tileset, and celestial atlas", () => {
     const calls: LoaderCall[] = [];
     const loader = {
       tilemapTiledJSON(key: string, url: string): void {
         calls.push({ method: "tilemapTiledJSON", key, url });
       },
-      svg(key: string, url: string, svgConfig: { width: number; height: number }): void {
-        calls.push({
-          height: svgConfig.height,
-          key,
-          method: "svg",
-          url,
-          width: svgConfig.width,
-        });
+      image(key: string, url: string): void {
+        calls.push({ method: "image", key, url });
+      },
+      atlas(key: string, textureURL: string, atlasURL: string): void {
+        calls.push({ atlasURL, key, method: "atlas", textureURL });
       },
     };
 
@@ -37,11 +37,15 @@ describe("preloadHomeYardMapAssets", () => {
         url: "tilemaps/home-yard-blockout.json",
       },
       {
-        height: 32,
         key: "home-yard-tiles",
-        method: "svg",
-        url: "tilesets/home-yard-placeholder.svg",
-        width: 224,
+        method: "image",
+        url: "tilesets/StarRealmsCozyForestPack24x24.png",
+      },
+      {
+        atlasURL: "images/celestial-objects.json",
+        key: "home-yard-celestial-objects",
+        method: "atlas",
+        textureURL: "images/celestial-objects.png",
       },
     ]);
   });
